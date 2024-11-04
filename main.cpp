@@ -26,8 +26,7 @@
     private:
         Type cell_type;
     };
-///////////////////
-
+    ///////////// ////
     // Grid class -> has a grid of n X n each item is cell object
     // function -> placeMagnet for inital state , print grid
     class Grid {
