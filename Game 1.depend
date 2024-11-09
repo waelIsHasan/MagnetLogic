@@ -1,5 +1,28 @@
 # depslib dependency file v1.0
-1730647783 source:c:\users\dell\desktop\game 1\main.cpp
+1731065410 source:c:\users\dell\desktop\game 1\main.cpp
 	<iostream>
 	<vector>
+	"Game.h"
+
+1731065307 source:c:\users\dell\desktop\game 1\cell.cpp
+	"Cell.h"
+
+1731065295 c:\users\dell\desktop\game 1\cell.h
+	<iostream>
+
+1731065350 source:c:\users\dell\desktop\game 1\game.cpp
+	"Game.h"
+	<algorithm>
+	<iostream>
+
+1731065342 c:\users\dell\desktop\game 1\game.h
+	"Grid.h"
+
+1731065319 c:\users\dell\desktop\game 1\grid.h
+	<vector>
+	"Cell.h"
+
+1731065328 source:c:\users\dell\desktop\game 1\grid.cpp
+	"Grid.h"
+	<iostream>
 

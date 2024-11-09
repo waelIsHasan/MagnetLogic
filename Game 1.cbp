@@ -32,7 +32,37 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename=".vs/Game 1/FileContentIndex/10d33cd7-6443-46e8-af09-d09aa187db4b.vsidx" />
+		<Unit filename=".vs/Game 1/FileContentIndex/465114a3-5d1b-497a-8f92-b6270e1f3604.vsidx" />
+		<Unit filename=".vs/Game 1/FileContentIndex/c057380a-705e-46b9-bd78-e049b85ad494.vsidx" />
+		<Unit filename=".vs/Game 1/v17/Browse.VC.db" />
+		<Unit filename=".vs/Game 1/v17/ipch/AutoPCH/1df932a70cbf0ae1/MAIN.ipch" />
+		<Unit filename=".vs/Game 1/v17/ipch/AutoPCH/43322a8d3740bcb9/MAIN.ipch" />
+		<Unit filename=".vs/Game 1/v17/ipch/AutoPCH/8ebae51aeb983da4/CELL.ipch" />
+		<Unit filename=".vs/ProjectSettings.json" />
+		<Unit filename=".vs/VSWorkspaceState.json" />
+		<Unit filename=".vs/slnx.sqlite" />
+		<Unit filename=".vscode/c_cpp_properties.json" />
+		<Unit filename=".vscode/launch.json" />
+		<Unit filename=".vscode/settings.json" />
+		<Unit filename="Cell.cpp" />
+		<Unit filename="Cell.h" />
+		<Unit filename="CppProperties.json" />
+		<Unit filename="Game 1.cbp" />
+		<Unit filename="Game 1.depend" />
+		<Unit filename="Game 1.layout" />
+		<Unit filename="Game.cpp" />
+		<Unit filename="Game.h" />
+		<Unit filename="Grid.cpp" />
+		<Unit filename="Grid.h" />
+		<Unit filename="bin/Debug/Game 1.exe" />
+		<Unit filename="info.txt" />
 		<Unit filename="main.cpp" />
+		<Unit filename="main.o" />
+		<Unit filename="obj/Debug/Cell.o" />
+		<Unit filename="obj/Debug/Game.o" />
+		<Unit filename="obj/Debug/Grid.o" />
+		<Unit filename="obj/Debug/main.o" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
