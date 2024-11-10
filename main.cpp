@@ -4,11 +4,9 @@
     #include <string>
     #include <sstream>
     #include<queue>
+    #include<stack>
 
     using namespace std;
-
-
-
 
     vector<pair<int,int>>holes;
 
@@ -301,7 +299,10 @@
         set<string> visitedStates;
         stateQueue.push(State(game.getGrid()));
         visitedStates.insert(stateQueue.front().stateString);
+        cout<<stateQueue.front().stateString<<endl;
+        int layers = 0;
         while (!stateQueue.empty() ) {
+            layers++;
             State currentState = stateQueue.front();
             stateQueue.pop();
 
@@ -317,7 +318,7 @@
             }
             // Check if current state is a winning state
             if (xx == 0) {
-                cout << "Found a winning state!" << endl;
+                cout << "Found a winning state! in layer "<<layers<< endl;
                 currentState.grid.print();
                 return;
                 //  return;
@@ -364,9 +365,93 @@
     }
 
 
+     void dfs(Game& game) {
+        stack<State> stateStack;
+        set<string> visitedStates;
+        stateStack.push(State(game.getGrid()));
+        visitedStates.insert(stateStack.top().stateString);
+        while (!stateStack.empty() ) {
+            State currentState = stateStack.top();
+            stateStack.pop();
+
+            // check if it is winning state
+            int xx= 0;
+            for(int i = 0; i < currentState.grid.getCells().size(); i++) {
+                for(int j = 0 ; j < currentState.grid.getCells().size(); j++) {
+                    if(currentState.grid.getCells()[i][j].getType() == Cell::HOLE) {
+                        xx++;
+                    }
+
+                }
+            }
+            // Check if current state is a winning state
+            if (xx == 0) {
+                cout << "Found a winning state!" << endl;
+                currentState.grid.print();
+                return;
+                //  return;
+            } else {
+                currentState.grid.print();
+            }
+            // create states tree
+            for (int i = 0; i < game.getGrid().getCells().size(); ++i) {
+                for (int j = 0; j < game.getGrid().getCells().size(); ++j) {
+                    if(currentState.grid.getCells()[i][j].getType() == Cell::RED_MAGNET ||
+                            currentState.grid.getCells()[i][j].getType() == Cell::PURPLE_MAGNET
+                      ) {
+                        for (int k = 0; k < game.getGrid().getCells().size(); ++k) {
+                            for (int h = 0; h < game.getGrid().getCells().size(); ++h) {
+                                if(currentState.grid.getCells()[k][h].getType() == Cell::EMPTY ||
+                                        currentState.grid.getCells()[k][h].getType() == Cell::HOLE
+                                  ) {
+                                    Game newGame = game;
+                                    newGame.setGrid(currentState.grid);
+                                    newGame.moveMagnet(i, j, k, h);
+                                    for(int b = 0; b < holes.size(); b++) {
+                                        int x = holes[b].first;
+                                        int y = holes[b].second;
+                                        if(newGame.getGrid().getCells()[x][y].getType() == Cell::EMPTY) {
+                                            newGame.getGrid().getCells()[holes[b].first][holes[b].second].setType(Cell::HOLE);
+                                        }
+                                    }
+                                    State newState(newGame.getGrid());
+
+                                    if (!visitedStates.count(newState.stateString)) {
+                                        visitedStates.insert(newState.stateString);
+                                        stateStack.push(newState);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        cout << "No solution found." << endl;
+    }
+
+
+
     vector<Grid>states;
 
-    void initState(Game &game) {
+    void initState1(Game &game) {
+        game.getGrid().placeMagnet(0, 0, Cell::RED_MAGNET);
+        game.getGrid().placeMagnet(0, 1, Cell::ROCK);
+        game.getGrid().placeMagnet(1, 1, Cell::HOLE);
+        game.getGrid().placeMagnet(2, 1, Cell::HOLE);
+        game.getGrid().placeMagnet(3, 2, Cell::HOLE);
+        game.getGrid().placeMagnet(0, 2, Cell::HOLE);
+        game.getGrid().placeMagnet(1, 2, Cell::ROCK);
+        game.getGrid().placeMagnet(3, 3, Cell::PURPLE_MAGNET);
+        holes.push_back({1, 1});
+        holes.push_back({2, 1});
+        holes.push_back({3, 2});
+        holes.push_back({0, 2});
+    }
+
+    void initState2(Game &game) {
         game.getGrid().placeMagnet(0, 0, Cell::PURPLE_MAGNET);
         game.getGrid().placeMagnet(0, 1, Cell::HOLE);
         game.getGrid().placeMagnet(0, 3, Cell::ROCK);
@@ -382,6 +467,16 @@
         holes.push_back({1, 4});
         holes.push_back({2, 1});
     }
+
+    void initState3(Game &game) {
+        game.getGrid().placeMagnet(0, 0, Cell::HOLE);
+        game.getGrid().placeMagnet(0 , 2, Cell::HOLE);
+        game.getGrid().placeMagnet(1 , 1, Cell::ROCK);
+        game.getGrid().placeMagnet(2 , 0, Cell::PURPLE_MAGNET);
+        holes.push_back({0, 0});
+        holes.push_back({0, 2});
+    }
+
 
     void checkHolesStatus(Game &game) {
         for(int i = 0; i < holes.size(); i++) {
@@ -406,22 +501,30 @@
     }
 
 
-
-
-
     int main() {
         cout<<"Enter the size of Grid : ";
         int sz = 0;
         cin>>sz;
         Game game(sz);
 
-        cout<<"choose the level :1";
+        cout<<"choose the level :1 , 2 , 3 \n ";
         int l = 1;
         cin>>l;
-        initState(game);
+
+        if(l == 1){initState1(game);
+        game.getGrid().print();
+        }
+        else if(l == 2){initState2(game);
+        game.getGrid().print();
+        }
+        else{initState3(game);
+        game.getGrid().print();
+        }
+        cout<<endl;
+
         bool t = true;
         int ch = 1;
-        cout<<"choose : 1 if you would like to play \n 2 if you would BFS algorithm to Play and find the solution\n";
+        cout<<"choose :\n 1 : if you would like to play \n 2 : if you would BFS algorithm to Play and find the solution \n 3 : DFS \n ";
         cin >>ch;
         if(ch == 1) {
             while (t) {
@@ -471,9 +574,11 @@
                 }
             }
             return 0;
-        } else {
+        } else if (ch == 2){
             bfs(game);
-
+        }
+        else {
+            dfs(game);
         }
 
     }
