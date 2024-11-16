@@ -47,7 +47,7 @@
     };
     ///////////// ////
     // Grid class -> has a grid of n X n each item is cell object
-    // function -> placeMagnet for inital state , print grid
+    // function -> placeCell for inital state , print grid
 
     class Grid {
     public:
@@ -67,7 +67,7 @@
             return oss.str();
         }
 
-        void placeMagnet(int x, int y, Cell::Type cell_type) {
+        void placeCell(int x, int y, Cell::Type cell_type) {
             if (x >= 0 && x < size && y >= 0 && y < size) {
                 cells[x][y].setType(cell_type);
             } else {
@@ -437,14 +437,14 @@
     vector<Grid>states;
 
     void initState1(Game &game) {
-        game.getGrid().placeMagnet(0, 0, Cell::RED_MAGNET);
-        game.getGrid().placeMagnet(0, 1, Cell::ROCK);
-        game.getGrid().placeMagnet(1, 1, Cell::HOLE);
-        game.getGrid().placeMagnet(2, 1, Cell::HOLE);
-        game.getGrid().placeMagnet(3, 2, Cell::HOLE);
-        game.getGrid().placeMagnet(0, 2, Cell::HOLE);
-        game.getGrid().placeMagnet(1, 2, Cell::ROCK);
-        game.getGrid().placeMagnet(3, 3, Cell::PURPLE_MAGNET);
+        game.getGrid().placeCell(0, 0, Cell::RED_MAGNET);
+        game.getGrid().placeCell(0, 1, Cell::ROCK);
+        game.getGrid().placeCell(1, 1, Cell::HOLE);
+        game.getGrid().placeCell(2, 1, Cell::HOLE);
+        game.getGrid().placeCell(3, 2, Cell::HOLE);
+        game.getGrid().placeCell(0, 2, Cell::HOLE);
+        game.getGrid().placeCell(1, 2, Cell::ROCK);
+        game.getGrid().placeCell(3, 3, Cell::PURPLE_MAGNET);
         holes.push_back({1, 1});
         holes.push_back({2, 1});
         holes.push_back({3, 2});
@@ -452,15 +452,15 @@
     }
 
     void initState2(Game &game) {
-        game.getGrid().placeMagnet(0, 0, Cell::PURPLE_MAGNET);
-        game.getGrid().placeMagnet(0, 1, Cell::HOLE);
-        game.getGrid().placeMagnet(0, 3, Cell::ROCK);
-        game.getGrid().placeMagnet(0, 4, Cell::ROCK);
-        game.getGrid().placeMagnet(1, 0, Cell::HOLE);
-        game.getGrid().placeMagnet(1, 4, Cell::HOLE);
-        game.getGrid().placeMagnet(2, 1, Cell::HOLE);
-        game.getGrid().placeMagnet(3, 0, Cell::ROCK);
-        game.getGrid().placeMagnet(3, 2, Cell::RED_MAGNET);
+        game.getGrid().placeCell(0, 0, Cell::PURPLE_MAGNET);
+        game.getGrid().placeCell(0, 1, Cell::HOLE);
+        game.getGrid().placeCell(0, 3, Cell::ROCK);
+        game.getGrid().placeCell(0, 4, Cell::ROCK);
+        game.getGrid().placeCell(1, 0, Cell::HOLE);
+        game.getGrid().placeCell(1, 4, Cell::HOLE);
+        game.getGrid().placeCell(2, 1, Cell::HOLE);
+        game.getGrid().placeCell(3, 0, Cell::ROCK);
+        game.getGrid().placeCell(3, 2, Cell::RED_MAGNET);
         holes.push_back({0, 1});
         holes.push_back({0, 3});
         holes.push_back({1, 0});
@@ -469,10 +469,10 @@
     }
 
     void initState3(Game &game) {
-        game.getGrid().placeMagnet(0, 0, Cell::HOLE);
-        game.getGrid().placeMagnet(0 , 2, Cell::HOLE);
-        game.getGrid().placeMagnet(1 , 1, Cell::ROCK);
-        game.getGrid().placeMagnet(2 , 0, Cell::PURPLE_MAGNET);
+        game.getGrid().placeCell(0, 0, Cell::HOLE);
+        game.getGrid().placeCell(0 , 2, Cell::HOLE);
+        game.getGrid().placeCell(1 , 1, Cell::ROCK);
+        game.getGrid().placeCell(2 , 0, Cell::PURPLE_MAGNET);
         holes.push_back({0, 0});
         holes.push_back({0, 2});
     }
